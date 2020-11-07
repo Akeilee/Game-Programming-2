@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
+#include <stdlib.h>
 
 #include "Maze.h"
 
@@ -15,7 +17,7 @@ int main() {
 	char input;
 	int r = 0;
 	int c = 0;
-	int exits = 0;
+	int players = 0;
 	bool notDoneB = false;
 
 	cout << " - MENU - \n"
@@ -37,7 +39,6 @@ int main() {
 
 		case 'n':
 
-
 			testM->clearAllMazes();
 			cout << "Enter row size from 9 to 31: ";
 			cin >> r;
@@ -46,12 +47,13 @@ int main() {
 			cin >> c;
 			testM->setCol(c);
 			cout << "Enter no. players from 2 to 10: "; ///////////////////////////////////////////////////
-			cin >> exits;
+			cin >> players;
 
-			testM->createMaze(r, c, exits);
+			testM->createMaze(r, c, players);
 			testM->createMiddle(testM->getRow(), testM->getCol());
 			cout << endl;
 			testM->printMaze();
+
 
 			cout << "\nEnter character for next operation: ";
 			cin >> input;
@@ -70,12 +72,13 @@ int main() {
 				testM->pPos();
 				testM->copyOGMaze();
 
-				for (int i = 0; i < exits; i++) {
+				for (int i = 0; i < players; i++) {
 					testM->getpPos();
-					testM->findPath(testM->getMaze(), testM->getTempi(), testM->getTempj(), testM->getRow() / 2, testM->getCol() / 2);
+					testM->findPath(testM->getMaze(), testM->getTempi(), testM->getTempj(), testM->getRow() / 2, testM->getCol() / 2, i);
+					
 					testM->copyTempMaze();
 				}
-
+				testM->playerPositions(players);
 				if (notDoneB == false) {
 					cout << endl;
 					testM->printSolution();
@@ -127,7 +130,14 @@ int main() {
 			break;
 
 		case 'o':
-			testM->readFile();
+
+			try {
+				testM->readFile();
+			}
+			catch (const invalid_argument& iae) {
+				cout << iae.what() << endl;
+			}
+
 			cout << "\nEnter character for next operation: ";
 			cin >> input;
 			break;

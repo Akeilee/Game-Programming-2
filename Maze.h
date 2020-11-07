@@ -26,10 +26,10 @@ public:
 	Maze();
 	~Maze();
 
-	void createMaze(int& r, int& c, int& exits);
+	void createMaze(int& r, int& c, int& players);
 	void createMiddle(int row, int col);
 	void createWall(int r, int c, int rSize, int cSize);
-	void createExit(int row, int col, int exits);
+	void createExit(int row, int col, int players);
 	std::vector<int> randGenerator();
 	bool inBounds(int r, int c, int rSize, int cSize);
 
@@ -37,9 +37,11 @@ public:
 	void getpPos();
 
 	bool tileIsValid(std::vector<std::vector<char>>& maze, std::vector<std::vector<char>>& visitedMaze, int r, int c);
-	void findPath(std::vector<std::vector<char>>& maze, int i, int j, int x, int y);
+	void findPath(std::vector<std::vector<char>>& maze, int i, int j, int x, int y, int players);
 
-	void playerPositions();
+	char switchPlayer(int currPlayer);
+
+	void playerPositions(int player);
 
 	void mazeSolvable();
 
@@ -74,12 +76,23 @@ public:
 	std::vector<std::vector<char>>& getMaze() { return mazeVect; };
 	std::vector<std::vector<char>>& getSolMaze() { return mazeSol; };
 
+	std::vector<std::vector<Node>*>* allPlayers = new std::vector<std::vector<Node>*>();
+
 private:
 	std::vector<std::vector<char>> mazeVect;
 	std::vector<std::vector<char>> mazeSol;
 	std::vector<std::vector<char>> tempMaze;
+
+
+
+	std::vector<std::vector<char>> tempMaze2;
+	std::vector<std::vector<char>> backupMaze;
+
+
 	std::vector<std::vector<char>> visitedMaze;
 	std::vector<std::vector<char>> overallShortestMaze;
 	std::list<int>pPosList;
+
+	
 
 };
