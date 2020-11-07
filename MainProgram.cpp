@@ -46,7 +46,7 @@ int main() {
 			cout << "Enter column size from 9 to 31: ";
 			cin >> c;
 			testM->setCol(c);
-			cout << "Enter no. players from 2 to 10: "; ///////////////////////////////////////////////////
+			cout << "Enter no. players from 1 to 8: "; ///////////////////////////////////////////////////
 			cin >> players;
 
 			testM->createMaze(r, c, players);
@@ -79,6 +79,8 @@ int main() {
 					testM->copyTempMaze();
 				}
 				testM->playerPositions(players);
+				testM->mazeSolvable();
+
 				if (notDoneB == false) {
 					cout << endl;
 					testM->printSolution();

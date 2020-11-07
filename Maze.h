@@ -41,7 +41,7 @@ public:
 
 	char switchPlayer(int currPlayer);
 
-	void playerPositions(int player);
+	int playerPositions(int player);
 
 	void mazeSolvable();
 
@@ -49,12 +49,16 @@ public:
 	void printShortestRoute();
 	void printSolution();
 
+	void printPlayerMove();
+
 	void clearAllMazes();
 	void copyOGMaze();
 	void copyTempMaze();
 
 	void readFile();
 	void writeFile();
+
+	void saveProgression();
 
 	int tempi;
 	int tempj;

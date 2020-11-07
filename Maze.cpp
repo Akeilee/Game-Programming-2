@@ -61,8 +61,8 @@ void Maze::createMaze(int& row, int& col, int& players) {
 			createWall(midRow, midCol, row, col);
 
 			while (!validPlayers) {
-				int maxPlayers = 10;
-				if (players <= maxPlayers && players >= 2 && players == int(players)) { //////////////////////////////////////////////////////////////////////////
+				int maxPlayers = 8;
+				if (players <= maxPlayers && players >= 1 && players == int(players)) { //////////////////////////////////////////////////////////////////////////
 					createExit(row, col, players);
 					validPlayers = true;
 				}
@@ -92,7 +92,7 @@ void Maze::createMaze(int& row, int& col, int& players) {
 			validPlayers = false;
 			cin.clear();
 			cin.ignore();
-			cout << "Enter no. players from 2 to 10: ";
+			cout << "Enter no. players from 1 to 8: ";
 			cin >> p2;
 			players = p2;
 
@@ -266,8 +266,7 @@ bool Maze::tileIsValid(vector<vector<char>>& maze, vector<vector<char>>& visited
 		return false;
 }
 
-void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int players) {
-
+void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int player) {
 
 	visitedMaze.resize(rowMain, std::vector<char>(colMain, ' '));
 	tempMaze.resize(rowMain, std::vector<char>(colMain, ' '));
@@ -298,7 +297,6 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 	int min_dist = INT_MAX;
 	Node* node = new Node;
 
-
 	while (!visitedList->empty()) {
 
 		*node = visitedList->front();
@@ -321,7 +319,6 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 			if (i == x && j == y) {
 				break;
 			}
-
 			if (tileIsValid(maze, visitedMaze, i + rowArr[k], j + colArr[k])) {
 				visitedMaze[i + rowArr[k]][j + colArr[k]] = 'o';
 
@@ -330,23 +327,11 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 				visitedList->push_back({ i + rowArr[k], j + colArr[k], dist + 1,currX ,currY, node, v++ });
 				allVisitedNodes->push_back(visitedList->back());
 
-
-				//cout << endl;
-				//for (int i = 0; i < mazeVect.size(); i++) {
-				//	for (int j = 0; j < mazeVect[i].size(); j++) {
-				//		cout << visitedMaze[i][j] << ' ';
-				//	}
-				//	cout << '\n';
-				//}
-
 			}
 		}
 	}
 
-
 	if (min_dist != INT_MAX) {
-
-		cout << "The shortest path from {" << j + 1 << ',' << i + 1 << "} to {" << y + 1 << ',' << x + 1 << "} is: " << min_dist << endl;
 
 		list<Node>* traverseNode = new list<Node>;
 
@@ -366,54 +351,16 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 		}
 
 		list<Node>::reverse_iterator rit;
-		////////////////////////////////
-		char i = 48;
-		int input;
-		bool cont = false;
-		int move = 1;
-
-
 		(*allPlayers).push_back(new vector<Node>());
-
 
 		for (rit = next(traverseNode->rbegin()); rit != traverseNode->rend(); ++rit) {
 
-
-
-			cout << players;
-			(*allPlayers)[players]->push_back(*rit);
-
-
+			(*allPlayers)[player]->push_back(*rit);
 			tempMaze[rit->prevx][rit->prevy] = 'o';
-
-			cout << endl;
-			cout << "Move " << move++ << endl;
-			for (int i = 0; i < mazeVect.size(); i++) {
-				for (int j = 0; j < mazeVect[i].size(); j++) {
-					cout << tempMaze[i][j] << ' ';
-				}
-				cout << '\n';
-			}
-
-			//if (cont == false) {
-			//	cout << "\nEnter '0' for next iteration or '1' to show all movement\n";
-			//	cin >> input;
-			//	if (input == 0) {
-			//		cont = false;
-			//		continue;
-			//	}
-			//	else {
-			//		cont = true;
-			//		continue;
-			//	}
-			//}
-
-
-
-
 		}
 
-		(*allPlayers)[players]->push_back({ rowMain / 2, colMain / 2,0,rowMain/2, colMain/2});
+		(*allPlayers)[player]->push_back({ rowMain / 2, colMain / 2,0,rowMain / 2, colMain / 2 });
+		(*allPlayers)[player]->push_back({ rowMain / 2, colMain / 2,0,rowMain / 2, colMain / 2 });
 
 		tempMaze[rowMain / 2][colMain / 2] = 'F';
 
@@ -439,7 +386,7 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 }
 
 char Maze::switchPlayer(int currPlayer) {
-	char path;
+	char path = NULL;
 	switch (currPlayer) {
 
 	case 0:
@@ -466,25 +413,25 @@ char Maze::switchPlayer(int currPlayer) {
 	case 7:
 		path = 'h';
 		break;
-	case 8:
-		path = 'i';
-		break;
-	case 9:
-		path = 'j';
-		break;
-
-
 	}
 	return path;
 }
 
-void Maze::playerPositions(int players) {
+int Maze::playerPositions(int players) {
 
 	tempMaze2 = mazeVect;
+	backupMaze = tempMaze2;
 
-	int change = 0;
+	char path = NULL;
+	int sizeofCol = 0;
+	int prevx = 0;
+	int prevy = 0;
+	bool skipped = false;
+	char tempPath = NULL;
+	char progressPrint;
+	bool progress = false;
+
 	int k = 2;
-
 	vector<int> playerarr[2];
 	playerarr->push_back(0);
 	playerarr->push_back(1);
@@ -494,157 +441,128 @@ void Maze::playerPositions(int players) {
 		k++;
 	}
 
-
-	int currPlayer = 0;
-	char path = NULL;
-	
-	int prevx = 0;
-	int prevy = 0;
-	bool skipped = false;
-	char tempPath = NULL;
-	backupMaze = tempMaze2;
-
-	cout << (*allPlayers).size();
 	vector<vector<int>*>* aaaaaa = new vector<vector<int>*>;
 
 	for (int a = 0; a <= (*allPlayers).size(); a++) {
 		
-		for (int i = 0; i < (*allPlayers).size(); i++) {
+		while ((*allPlayers)[a]->size() != 0) {
 
+			if (sizeofCol == (*allPlayers).size()) {
+				return 1;
+			}
+			else {
+				sizeofCol = 0;
+				for (int i = 0; i < (*allPlayers).size(); i++) {
+					for (int j = 0; j < (*allPlayers)[i]->size(); j++) {
 
-			cout << (*allPlayers).size();
-			
-			for (int j = 0; j < (*allPlayers)[i]->size(); j++) { //////////////////////////////////
-
-
-				cout << (*allPlayers)[i]->size();
-
-				if ((*allPlayers)[i]->size() <=0) {
-					break;
-				}
-				else {
-					
-					prevx = allPlayers->at(i)->at(0).prevx;
-					prevy = allPlayers->at(i)->at(0).prevy;
-					(*aaaaaa).push_back(new vector<int>());
-					(*aaaaaa)[i]->push_back(prevx);
-					(*aaaaaa)[i]->push_back(prevy);
-
-					
-
-					path = switchPlayer(i);
-					cout << "\nPlayer " << i+1 << " turn:\n";
-
-					for (int i = 0; i < tempMaze2.size(); i++) {
-						for (int j = 0; j < tempMaze2[i].size(); j++) {
-							
-							
-							if (skipped == false && tempMaze2[i][j] == path) {
-								tempMaze2[i][j] = ' ';
-							}
-							if (skipped == true) {
-
-								if (backupMaze[i][j] == path) {
-									backupMaze[i][j] = ' ';
-									tempMaze2 = backupMaze;
-								}
-								
-								
-							}
-						
-
-						}
-						
-					}
-					skipped = false;
-
-					if ((tempMaze2)[allPlayers->at(i)->at(0).prevx][allPlayers->at(i)->at(0).prevy] <97) {
-
-						tempMaze2[allPlayers->at(i)->at(0).prevx][allPlayers->at(i)->at(0).prevy] = path;
-
-
-						if ((*allPlayers)[i]->size() ==1) {
-							cout << "here";
-							tempMaze2[allPlayers->at(i)->at(0).x][allPlayers->at(i)->at(0).y] = 'F';
+						if ((*allPlayers)[i]->size() <= 0) {
+							break;
 						}
 						else {
-							(*allPlayers)[i]->erase((*allPlayers)[i]->begin());
-						}
-						
-					}
+							prevx = allPlayers->at(i)->at(0).prevx;
+							prevy = allPlayers->at(i)->at(0).prevy;
+							(*aaaaaa).push_back(new vector<int>());
+							(*aaaaaa)[i]->push_back(prevx);
+							(*aaaaaa)[i]->push_back(prevy);
 
-					else {
-						cout << "skipped\n";
-						cout << tempMaze2[allPlayers->at(i)->at(0).prevx][allPlayers->at(i)->at(0).prevy];
-
-						for (int i = 0; i < backupMaze.size(); i++) {
-							for (int j = 0; j < backupMaze[i].size(); j++) {
-								cout << backupMaze[i][j] << ' ';
+							if ((*allPlayers)[i]->size() <= 1) {
+								sizeofCol += 1;
+								break;
 							}
-							cout << '\n';
-						}
-						backupMaze = backupMaze;
-						skipped = true;
-						tempPath = path;
-						//tempMaze2[allPlayers->at(i)->at(change).prevx][allPlayers->at(i)->at(change).prevy] = 'H';
-						//break;
-					}
 
+							path = switchPlayer(i);
+							cout << "\nPlayer " << path << " turn:\n";
 
-					if (skipped == false) {
-						for (int i = 0; i < tempMaze2.size(); i++) {
-							for (int j = 0; j < tempMaze2[i].size(); j++) {
-								cout << tempMaze2[i][j] << ' ';
+							for (int i = 0; i < tempMaze2.size(); i++) {
+								for (int j = 0; j < tempMaze2[i].size(); j++) {
+									if (tempMaze2[i][j] == 'P') {
+										tempMaze2[i][j] = ' ';
+									}
+									if (skipped == false && tempMaze2[i][j] == path) {
+										tempMaze2[i][j] = ' ';
+									}
+									if (skipped == true) {
+										if (backupMaze[i][j] == path) {
+											backupMaze[i][j] = ' ';
+											tempMaze2 = backupMaze;
+										}
+									}
+								}
 							}
-							cout << '\n';
+							skipped = false;
+
+							if ((tempMaze2)[allPlayers->at(i)->at(0).prevx][allPlayers->at(i)->at(0).prevy] < 97) {
+								tempMaze2[allPlayers->at(i)->at(0).prevx][allPlayers->at(i)->at(0).prevy] = path;
+
+								if ((*allPlayers)[i]->size() == 1) {
+									break;
+								}
+								if ((*allPlayers)[i]->size() == 2) {
+									tempMaze2[allPlayers->at(i)->at(0).x][allPlayers->at(i)->at(0).y] = 'F';
+									(*allPlayers)[i]->erase((*allPlayers)[i]->begin());
+								}
+								else {
+									(*allPlayers)[i]->erase((*allPlayers)[i]->begin());
+								}
+
+							}
+							else {
+								cout << "---- Skipped ----\n";
+								tempMaze2 = backupMaze;
+								skipped = true;
+								tempPath = path;
+							}
+							sizeofCol += (*allPlayers)[i]->size();
+
+							if (progress == false) {
+								printPlayerMove();
+								cout << "\nEnter s to save maze progression\n";
+								cout << "\nEnter 1 to continue or enter anything else to print all player movement mazes\n";
+								cin >> progressPrint;
+								if (progressPrint == 's') {
+									saveProgression();
+									cout << "\nEnter 1 to continue or enter anything else to print all player movement mazes\n";
+									cin >> progressPrint;
+								}
+								(progressPrint == '1' ? progress = false : progress = true);
+							}
+							else {
+								printPlayerMove();
+							}
+
+							backupMaze = tempMaze2;
 						}
-						backupMaze = tempMaze2;
+						break;
 					}
-				
-					
-					
 				}
-
-				
-
-
-				break;
 			}
 			
-		
 		}
-		
-		change++;
-
-		//aaaaaa->clear();
-		
-		//(prevx != 0 && prevy != 0 ? tempMaze2[prevx][prevy] = ' ' : tempMaze2[prevx][prevy] = 'o');
 	}
-
-
-
-	//for (int i = 0; i < (*allPlayers).size(); i++) {
-	//	for (int j = 0; j < (*allPlayers)[i]->size(); j++) {
-	//		cout << allPlayers->size() << endl;
-	//		cout << (*allPlayers)[i]->size() << endl;
-	//		cout << allPlayers[i][j]->front().prevx;
-	//		cout << allPlayers[i][j]->front().prevy << endl;
-
-	//		while (allPlayers[i].size() > 1) {
-	//			//(*allPlayers)[i][j].erase(*&(allPlayers)->begin());
-	//			(allPlayers[i][j])->erase((allPlayers[i][j])->begin());
-	//			break;
-	//		}
-	//		//tempMaze[rit->prevx][rit->prevy] = 'o';
-	//	}
-	//}
-
+	return 1;
 }
 
 
 
 void Maze::mazeSolvable() {
 
+	int playerCount = 0;
+
+	for (int i = 0; i < tempMaze2.size(); i++) {
+		for (int j = 0; j < tempMaze2[i].size(); j++) {
+			(tempMaze2[i][j] >= 97 ? playerCount++ : 0);
+		}
+	}
+
+	if (playerCount == 8) {
+		cout << "\n--- Maze not solvable ---\n";
+	}
+	else if (playerCount >= 2 && playerCount < 8) {
+		cout << "\n--- Maze partially solvable ---\n";
+	}
+	else {
+		cout << "\n--- Maze solvable ---\n";
+	}
 
 }
 
@@ -686,9 +604,20 @@ void Maze::printShortestRoute() {
 
 void Maze::printSolution() {
 
+	cout << "\nShortest route for all players\n";
 	for (int i = 0; i < mazeSol.size(); i++) {
 		for (int j = 0; j < mazeSol[i].size(); j++) {
 			cout << mazeSol[i][j] << ' ';
+		}
+		cout << '\n';
+	}
+}
+
+
+void Maze::printPlayerMove() {
+	for (int i = 0; i < tempMaze2.size(); i++) {
+		for (int j = 0; j < tempMaze2[i].size(); j++) {
+			cout << tempMaze2[i][j] << ' ';
 		}
 		cout << '\n';
 	}
@@ -712,9 +641,6 @@ void Maze::copyTempMaze() {
 
 	for (int i = 0; i < mazeSol.size(); i++) {
 		for (int j = 0; j < mazeSol[i].size(); j++) {
-			if (mazeSol[i][j] == 'o' && tempMaze[i][j] == 'o') {
-				mazeSol[i][j] = 'H';
-			}
 			if (mazeSol[i][j] == ' ' && tempMaze[i][j] == 'o') {
 				mazeSol[i][j] = 'o';
 			}
@@ -736,8 +662,9 @@ void Maze::copyTempMaze() {
 }
 
 
-void Maze::readFile() throw(invalid_argument) {
+void Maze::readFile() throw (invalid_argument) {
 
+	bool valid = false;
 	string input;
 	string output;
 	cout << "Enter file name to open: ";
@@ -747,15 +674,21 @@ void Maze::readFile() throw(invalid_argument) {
 
 	if (readMaze.is_open()) {
 		while (getline(readMaze, output)) {
-			cout << output;
-			cout << '\n';
+
+			if (output.find("X X ") != std::string::npos || output.find("E") != std::string::npos || output.find("P") != std::string::npos || output.find("F") != std::string::npos) {
+				valid = true;
+				cout << output;
+				cout << '\n';
+			}
+
 		}
+		cout << (valid == true ? "\nValid Maze\n" : "\nNot Valid maze\n");
+
 		readMaze.close();
 	}
 	else {
 		throw invalid_argument('"' + input + "\" file does not exist\n");
 	}
-
 
 }
 
@@ -805,5 +738,27 @@ void Maze::writeFile() {
 
 }
 
+
+void Maze::saveProgression() {
+	ofstream mazeTxt;
+	string input;
+	vector<vector<char>> tempPrint;
+
+	cout << "Enter file save name: ";
+	cin >> input;
+	mazeTxt.open(input + ".txt");
+
+	tempPrint = tempMaze2;
+
+	for (const auto& x : tempPrint) {
+		copy(x.begin(), x.end(), ostream_iterator<char>(mazeTxt, " "));
+		mazeTxt << '\n';
+	}
+
+	mazeTxt.close();
+
+	cout << "File saved as " << input << ".txt" << endl;
+	tempPrint.clear();
+}
 
 
