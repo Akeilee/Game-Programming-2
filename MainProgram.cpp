@@ -19,14 +19,19 @@ int main() {
 	int c = 0;
 	int players = 0;
 	bool notDoneB = false;
+	int noLRow = 0;
+	int noLCol = 0;
+	int noLPlayer = 0;
+
 
 	cout << " - MENU - \n"
 		<< " - m = Show Menu\n"
 		<< " - n = Create new maze\n"
-		<< " - b = Find all routes\n"
+		<< " - b = Find all routes with player progression mazes\n"
 		<< " - f = Shortest path out of all routes\n"
+		<< " - t = Maze analysis\n"
 		<< " - s = Save CURRENT shown Maze to file\n"
-		<< " - a = Save BLANK maze to file\n"
+		<< " - a = Save Original maze to file\n"
 		<< " - o = Open file\n"
 		<< " - e or 0 = Exit program\n\n"
 		<< "Please enter a character:\n" << endl;;
@@ -38,7 +43,7 @@ int main() {
 		switch (input) {
 
 		case 'n':
-
+			testM->setMazeLimit(false);
 			testM->clearAllMazes();
 			cout << "Enter row size from 9 to 31: ";
 			cin >> r;
@@ -63,37 +68,41 @@ int main() {
 			break;
 
 		case 'b':
+			if (testM->getMazeLimit() != true) {
+				if (testM->getMaze().size() <= 0) {
+					cout << "No maze found, please create a maze\n\n";
+					input = 'n';
+				}
+				else {
+					testM->pPos();
+					testM->copyOGMaze();
 
-			if (testM->getMaze().size() <= 0) {
-				cout << "No maze found, please create a maze\n\n";
-				input = 'n';
+					for (int i = 0; i < players; i++) {
+						testM->getpPos();
+						testM->findPath(testM->getMaze(), testM->getTempi(), testM->getTempj(), testM->getRow() / 2, testM->getCol() / 2, i);
+
+					}
+					testM->playerPositions(players);
+					testM->mazeSolvable();
+
+					if (notDoneB == false) {
+						cout << endl;
+						testM->printSolution();
+						testM->setShouldPrint(true);
+						cout << "\nEnter character for next operation: ";
+						cin >> input;
+					}
+					if (notDoneB == true) {
+						testM->setShouldPrint(false);
+						input = 'f';
+						notDoneB = false;
+					}
+				}
 			}
 			else {
-				testM->pPos();
-				testM->copyOGMaze();
-
-				for (int i = 0; i < players; i++) {
-					testM->getpPos();
-					testM->findPath(testM->getMaze(), testM->getTempi(), testM->getTempj(), testM->getRow() / 2, testM->getCol() / 2, i);
-					
-					testM->copyTempMaze();
-				}
-				testM->playerPositions(players);
-				testM->mazeSolvable();
-
-				if (notDoneB == false) {
-					cout << endl;
-					testM->printSolution();
-					testM->setShouldPrint(true);
-					cout << "\nEnter character for next operation: ";
-					cin >> input;
-				}
-				if (notDoneB == true) {
-					testM->setShouldPrint(false);
-					input = 'f';
-					notDoneB = false;
-				}
-
+				cout << "\nUnable to use maze from analysis, please create a new maze\n";
+				cout << "\nEnter character for next operation: ";
+				cin >> input;
 			}
 			break;
 
@@ -115,6 +124,20 @@ int main() {
 				cout << "\nEnter character for next operation: ";
 				cin >> input;
 			}
+			break;
+
+		case 't':
+			testM->setMazeLimit(true);
+			cout << "Enter row limit:\n";
+			cin >> noLRow;
+			cout << "Enter col limit:\n";
+			cin >> noLCol;
+			cout << "Enter players limit:\n";
+			cin >> noLPlayer;
+			cout << "\n100 random mazes with max size limit of "<< noLRow <<"x" <<noLCol << " and max "<< noLPlayer <<" players:\n";
+			testM->mazeAnalysis(noLRow, noLCol, noLPlayer);
+			cout << "\nEnter character for next operation: ";
+			cin >> input;
 			break;
 
 		case 's':

@@ -45,6 +45,8 @@ public:
 
 	void mazeSolvable();
 
+	void mazeAnalysis(int row, int col, int player);
+
 	void printMaze();
 	void printShortestRoute();
 	void printSolution();
@@ -76,21 +78,24 @@ public:
 	void setShouldPrint(bool p) { shouldPrint = p; };
 	bool printOriginal;
 	void setprintOriginal(bool p) { printOriginal = p; };
+	bool mazeLimit;
+	bool getMazeLimit() { return mazeLimit; };
+	void setMazeLimit(bool l) { mazeLimit = l; };
 
 	std::vector<std::vector<char>>& getMaze() { return mazeVect; };
 	std::vector<std::vector<char>>& getSolMaze() { return mazeSol; };
 
-	std::vector<std::vector<Node>*>* allPlayers = new std::vector<std::vector<Node>*>();
+	
 
 private:
 	std::vector<std::vector<char>> mazeVect;
 	std::vector<std::vector<char>> mazeSol;
 	std::vector<std::vector<char>> tempMaze;
 
+	std::vector<std::vector<Node>*>* allPlayers = new std::vector<std::vector<Node>*>(); ///////////////////////
 
-
-	std::vector<std::vector<char>> tempMaze2;
-	std::vector<std::vector<char>> backupMaze;
+	std::vector<std::vector<char>> playerPosMaze;
+	std::vector<std::vector<char>> backupPMaze;
 
 
 	std::vector<std::vector<char>> visitedMaze;
