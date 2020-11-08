@@ -1,11 +1,12 @@
 //Author: Jane Lee
 //Date: 11/2020
-//8501 Programming CW1
+//8501 Programming CW2
 
 #pragma once
 #include <iostream>
 #include <vector>
 #include <list>
+#include <string>
 
 struct Node {
 	int x;
@@ -17,7 +18,6 @@ struct Node {
 
 	struct Node* parent;
 	int v;
-
 };
 
 class Maze {
@@ -40,9 +40,7 @@ public:
 	void findPath(std::vector<std::vector<char>>& maze, int i, int j, int x, int y, int players);
 
 	char switchPlayer(int currPlayer);
-
 	int playerPositions(int player);
-
 	void mazeSolvable();
 
 	void mazeAnalysis(int row, int col, int player);
@@ -50,17 +48,16 @@ public:
 	void printMaze();
 	void printShortestRoute();
 	void printSolution();
-
 	void printPlayerMove();
 
 	void clearAllMazes();
 	void copyOGMaze();
 	void copyTempMaze();
 
-	void readFile();
+	void saveProgression();
+	void readFile(std::string input);
 	void writeFile();
 
-	void saveProgression();
 
 	int tempi;
 	int tempj;
@@ -86,22 +83,18 @@ public:
 	std::vector<std::vector<char>>& getSolMaze() { return mazeSol; };
 
 	
-
 private:
 	std::vector<std::vector<char>> mazeVect;
 	std::vector<std::vector<char>> mazeSol;
 	std::vector<std::vector<char>> tempMaze;
 
-	std::vector<std::vector<Node>*>* allPlayers = new std::vector<std::vector<Node>*>(); ///////////////////////
+	std::vector<std::vector<Node>*>* allPlayers = new std::vector<std::vector<Node>*>(); 
 
 	std::vector<std::vector<char>> playerPosMaze;
 	std::vector<std::vector<char>> backupPMaze;
 
-
 	std::vector<std::vector<char>> visitedMaze;
 	std::vector<std::vector<char>> overallShortestMaze;
 	std::list<int>pPosList;
-
-	
 
 };

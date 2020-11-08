@@ -1,18 +1,14 @@
 //Author: Jane Lee
 //Date: 11/2020
-//8501 Programming CW1
+//8501 Programming CW2
 
-#include <iostream>
 #include <fstream>
-#include <vector>
-#include <string>
 #include <algorithm>
-#include <list>
-
 
 #include "Maze.h"
 
 using namespace std;
+
 int rowArr[] = { -1, 0, 0, 1 };
 int colArr[] = { 0, -1, 1, 0 };
 int lowest = INT_MAX;
@@ -54,7 +50,6 @@ void Maze::createMaze(int& row, int& col, int& players) {
 	}
 
 	while (!validMaze) {
-
 		if ((row <= uLim && row >= lLim) && (col <= uLim && col >= lLim) && row == int(row) && col == int(col)) {
 			rowMain = row;
 			colMain = col;
@@ -74,11 +69,10 @@ void Maze::createMaze(int& row, int& col, int& players) {
 			createWall(midRow, midCol, row, col);
 
 			while (!validPlayers) {
-				if (players <= maxPlayers && players >= 1 && players == int(players)) { //////////////////////////////////////////////////////////////////////////
+				if (players <= maxPlayers && players >= 1 && players == int(players)) { 
 					createExit(row, col, players);
 					validPlayers = true;
 				}
-
 				else {
 					cin.clear();
 					cin.ignore();
@@ -169,9 +163,7 @@ void Maze::createWall(int r, int c, int rSize, int cSize) {
 				createWall(x2, y2, rSize, cSize);
 			}
 		}
-
 	}
-
 }
 
 void Maze::createExit(int row, int col, int exits) {
@@ -251,9 +243,7 @@ void Maze::pPos() {
 				pPosList.push_back(i);
 				pPosList.push_back(j);
 			}
-
 		}
-
 	}
 }
 
@@ -310,7 +300,6 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 	Node* node = new Node;
 
 	while (!visitedList->empty()) {
-
 		*node = visitedList->front();
 		visitedList->pop_front();
 
@@ -327,7 +316,6 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 
 		int v = 0;
 		for (int k = 0; k < 4; ++k) {
-
 			if (i == x && j == y) {
 				break;
 			}
@@ -340,21 +328,10 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 				allVisitedNodes->push_back(visitedList->back());
 
 			}
-
-			//cout << "\n";
-			//for (int i = 0; i < mazeVect.size(); i++) {
-			//	for (int j = 0; j < mazeVect[i].size(); j++) {
-			//		cout<<visitedMaze[i][j] << " ";
-			//	}
-			//	cout << "\n";
-			//}
-
-
 		}
 	}
 
 	if (min_dist != INT_MAX) {
-
 		list<Node>* traverseNode = new list<Node>;
 
 		for (int i = 0; i < min_dist; i++) {
@@ -366,7 +343,6 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 
 			list<Node>::iterator it;
 			for (it = traverseNode->begin(); it != traverseNode->end(); ++it) {
-				//tempMaze[it->prevx][it->prevy] = 'o';
 				tempX = it->prevx;
 				tempY = it->prevy;
 			}
@@ -376,7 +352,6 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 		(*allPlayers).push_back(new vector<Node>());
 
 		for (rit = next(traverseNode->rbegin()); rit != traverseNode->rend(); ++rit) {
-
 			(*allPlayers)[player]->push_back(*rit);
 			tempMaze[rit->prevx][rit->prevy] = 'o';
 		}
@@ -418,6 +393,7 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 	node = nullptr;
 }
 
+
 char Maze::switchPlayer(int currPlayer) {
 	char path = NULL;
 	switch (currPlayer) {
@@ -451,7 +427,6 @@ char Maze::switchPlayer(int currPlayer) {
 }
 
 int Maze::playerPositions(int players) {
-
 	playerPosMaze = mazeVect;
 	backupPMaze = playerPosMaze;
 
@@ -468,7 +443,6 @@ int Maze::playerPositions(int players) {
 	for (int a = 0; a <= (*allPlayers).size(); a++) {
 		
 		while ((*allPlayers)[a]->size() != 0) {
-
 			if (sizeofCol == (*allPlayers).size()) {
 				return 1;
 			}
@@ -546,51 +520,44 @@ int Maze::playerPositions(int players) {
 							else {
 								printPlayerMove();
 							}
-
 							backupPMaze = playerPosMaze;
 						}
 						break;
 					}
 				}
 			}
-			
 			firstMove = false;
 		}
 	}
 	return 1;
 }
 
-
-
 void Maze::mazeSolvable() {
-
 	int playerCount = 0;
 
 	for (int i = 0; i < playerPosMaze.size(); i++) {
 		for (int j = 0; j < playerPosMaze[i].size(); j++) {
-			(playerPosMaze[i][j] >= 97 ? playerCount++ : 0);
+			(playerPosMaze[i][j] >= 97 ? playerCount++ : playerCount = playerCount);
 		}
 	}
 
 	if (playerCount == 8) {
-		cout << "\n--- Maze not solvable ---\n";
+		cout << "\n--- Maze not solvable ---\n"<<"--- Deadlock scenario ---\n";
 	}
 	else if (playerCount >= 2 && playerCount < 8) {
-		cout << "\n--- Maze partially solvable ---\n";
+		cout << "\n--- Maze partially solvable ---\n" << "--- Deadlock scenario ---\n";
 	}
 	else {
-		cout << "\n--- Maze solvable ---\n";
+		cout << "\n--- Maze solvable ---\n" << "--- No Deadlock scenario ---\n";
 	}
 
 }
 
 
 void Maze::mazeAnalysis(int row, int col, int player) {
-
 	int i = 1;
 
 	while (i != 101) {
-
 		int playerRand = rand()% (player-1) + 2;
 		int rowRand = rand()% (row-8) + 9;
 		int colRand = rand()% (col-8) + 9;
@@ -609,11 +576,6 @@ void Maze::mazeAnalysis(int row, int col, int player) {
 }
 
 
-
-
-
-
-
 void Maze::printMaze() {
 	for (int i = 0; i < mazeVect.size(); i++) {
 		for (int j = 0; j < mazeVect[i].size(); j++) {
@@ -625,7 +587,6 @@ void Maze::printMaze() {
 }
 
 void Maze::printShortestRoute() {
-
 	if (lowest == INT_MAX) {
 		cout << "\nNo route found\n";
 	}
@@ -643,7 +604,6 @@ void Maze::printShortestRoute() {
 }
 
 void Maze::printSolution() {
-
 	cout << "\nShortest route for all players\n";
 	for (int i = 0; i < mazeSol.size(); i++) {
 		for (int j = 0; j < mazeSol[i].size(); j++) {
@@ -652,7 +612,6 @@ void Maze::printSolution() {
 		cout << '\n';
 	}
 }
-
 
 void Maze::printPlayerMove() {
 	for (int i = 0; i < playerPosMaze.size(); i++) {
@@ -665,6 +624,7 @@ void Maze::printPlayerMove() {
 		cout << '\n';
 	}
 }
+
 
 void Maze::clearAllMazes() {
 	mazeVect.clear();
@@ -703,33 +663,55 @@ void Maze::copyTempMaze() {
 				mazeSol[i][j] = mazeSol[i][j];
 		}
 	}
-
 	tempMaze.clear();
 }
 
 
-void Maze::readFile() throw (invalid_argument) {
+void Maze::saveProgression() {
+	ofstream mazeTxt;
+	string input;
+	vector<vector<char>> tempPrint;
+
+	cout << "Enter file save name: ";
+	cin >> input;
+	mazeTxt.open(input + ".txt");
+
+	tempPrint = playerPosMaze;
+
+	for (const auto& x : tempPrint) {
+		copy(x.begin(), x.end(), ostream_iterator<char>(mazeTxt, " "));
+		mazeTxt << '\n';
+	}
+
+	mazeTxt.close();
+
+	cout << "File saved as " << input << ".txt" << endl;
+	tempPrint.clear();
+}
+
+void Maze::readFile(string in) throw (invalid_argument) {
 
 	bool valid = false;
 	string input;
 	string output;
-	cout << "Enter file name to open: ";
-	cin >> input;
-	cout << '\n';
+	input = in;
 	ifstream readMaze(input + ".txt");
 
 	if (readMaze.is_open()) {
 		while (getline(readMaze, output)) {
-
-			if (output.find("X X ") != std::string::npos || output.find("E") != std::string::npos || output.find("P") != std::string::npos || output.find("F") != std::string::npos) {
+			if (input != "information" && (output.find("X X ") != std::string::npos || output.find("E") != std::string::npos || output.find("P") != std::string::npos || output.find("F") != std::string::npos)) {
 				valid = true;
 				cout << output;
 				cout << '\n';
 			}
-
+			else {
+				cout << output;
+				cout << '\n';
+			}
 		}
-		cout << (valid == true ? "\nValid Maze\n" : "\nNot Valid maze\n");
-
+		if (input != "information") {
+			cout << (valid == true ? "\nValid Maze\n" : "\nNot Valid maze\n");
+		}
 		readMaze.close();
 	}
 	else {
@@ -779,32 +761,11 @@ void Maze::writeFile() {
 
 		cout << "File saved as " << input << ".txt" << endl;
 		tempPrint.clear();
-
 	}
 
 }
 
 
-void Maze::saveProgression() {
-	ofstream mazeTxt;
-	string input;
-	vector<vector<char>> tempPrint;
 
-	cout << "Enter file save name: ";
-	cin >> input;
-	mazeTxt.open(input + ".txt");
-
-	tempPrint = playerPosMaze;
-
-	for (const auto& x : tempPrint) {
-		copy(x.begin(), x.end(), ostream_iterator<char>(mazeTxt, " "));
-		mazeTxt << '\n';
-	}
-
-	mazeTxt.close();
-
-	cout << "File saved as " << input << ".txt" << endl;
-	tempPrint.clear();
-}
 
 

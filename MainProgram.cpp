@@ -1,6 +1,6 @@
 //Author: Jane Lee
 //Date: 11/2020
-//8501 Programming CW1
+//8501 Programming CW2
 
 #include <iostream>
 #include <fstream>
@@ -22,19 +22,23 @@ int main() {
 	int noLRow = 0;
 	int noLCol = 0;
 	int noLPlayer = 0;
+	string fileName;
+	bool fromI = false;
 
 
 	cout << " - MENU - \n"
 		<< " - m = Show Menu\n"
+		<< " - r = Restart Program\n"
 		<< " - n = Create new maze\n"
-		<< " - b = Find all routes with player progression mazes\n"
+		<< " - b = Find all routes (player progression)\n"
 		<< " - f = Shortest path out of all routes\n"
 		<< " - t = Maze analysis\n"
+		<< " - i = Info displaying properties of different maze and player combinations\n"
 		<< " - s = Save CURRENT shown Maze to file\n"
-		<< " - a = Save Original maze to file\n"
+		<< " - a = Save BLANK maze to file\n"
 		<< " - o = Open file\n"
-		<< " - e or 0 = Exit program\n\n"
-		<< "Please enter a character:\n" << endl;;
+		<< " - e = Exit program\n\n"
+		<< "Please enter a character:\n" << endl;
 
 	cin >> input;
 
@@ -51,14 +55,30 @@ int main() {
 			cout << "Enter column size from 9 to 31: ";
 			cin >> c;
 			testM->setCol(c);
-			cout << "Enter no. players from 1 to 8: "; ///////////////////////////////////////////////////
+			cout << "Enter no. players from 1 to 8: "; 
 			cin >> players;
+
+			while (cin.fail()) {
+				cout << "\n\nWrong input, please try again\n";
+				cin.clear();
+				cin.ignore();
+				r = 0;
+				c = 0;
+				players = 0;
+				cout << "Enter row size from 7 to 51: ";
+				cin >> r;
+				testM->setRow(r);
+				cout << "Enter column size from 7 to 51: ";
+				cin >> c;
+				testM->setCol(c);
+				cout << "Enter no. exits from 1 to " << (((testM->getRow() * 2) + (testM->getCol() * 2)) - 4) / 4 << ": ";
+				cin >> players;
+			}
 
 			testM->createMaze(r, c, players);
 			testM->createMiddle(testM->getRow(), testM->getCol());
 			cout << endl;
 			testM->printMaze();
-
 
 			cout << "\nEnter character for next operation: ";
 			cin >> input;
@@ -80,7 +100,6 @@ int main() {
 					for (int i = 0; i < players; i++) {
 						testM->getpPos();
 						testM->findPath(testM->getMaze(), testM->getTempi(), testM->getTempj(), testM->getRow() / 2, testM->getCol() / 2, i);
-
 					}
 					testM->playerPositions(players);
 					testM->mazeSolvable();
@@ -107,7 +126,6 @@ int main() {
 			break;
 
 		case 'f':
-
 			if (testM->getMaze().size() <= 0) {
 				cout << "No maze found, please create a maze\n\n";
 				input = 'n';
@@ -140,6 +158,11 @@ int main() {
 			cin >> input;
 			break;
 
+		case 'i':
+			fromI = true;
+			input = 'o';
+			break;
+
 		case 's':
 			testM->setprintOriginal(false);
 			testM->writeFile();
@@ -155,14 +178,21 @@ int main() {
 			break;
 
 		case 'o':
-
 			try {
-				testM->readFile();
+				if (fromI == false) {
+					cout << "Enter file name to open: ";
+					cin >> fileName;
+				}
+				else {
+					fileName = "information";
+					fromI = false;
+				}
+				cout << '\n';
+				testM->readFile(fileName);
 			}
 			catch (const invalid_argument& iae) {
 				cout << iae.what() << endl;
 			}
-
 			cout << "\nEnter character for next operation: ";
 			cin >> input;
 			break;
@@ -170,24 +200,32 @@ int main() {
 		case 'm':
 			cout << "\n - MENU - \n"
 				<< " - m = Show Menu\n"
+				<< " - r = Restart Program\n"
 				<< " - n = Create new maze\n"
-				<< " - b = Find all routes\n"
+				<< " - b = Find all routes (player progression)\n"
 				<< " - f = Shortest path out of all routes\n"
+				<< " - t = Maze analysis\n"
+				<< " - i = Info displaying properties of different maze and player combinations\n"
 				<< " - s = Save CURRENT shown Maze to file\n"
 				<< " - a = Save BLANK maze to file\n"
 				<< " - o = Open file\n"
-				<< " - e or 0 = Exit program\n";
+				<< " - e = Exit program\n";
 			cout << "\nEnter character for next operation: ";
 			cin >> input;
 			break;
 
-		case 'e':
-			cout << "Exiting...";
-			delete testM;
-			testM = nullptr;
-			return 0;
+		case 'r':
+			cout << "\nProgram Restarted\n";
+			r = 0;
+			c = 0;
+			players = 0;
+			notDoneB = false;
+			testM->setMazeLimit(false);
+			testM->clearAllMazes();
+			input = 'm';
+			break;
 
-		case '0': //////////////////////////////////////////////////////////////////
+		case 'e':
 			cout << "Exiting...";
 			delete testM;
 			testM = nullptr;
@@ -199,8 +237,9 @@ int main() {
 			break;
 		}
 
-
 	}
 
+	delete testM;
+	testM = nullptr;
 	return 0;
 }
