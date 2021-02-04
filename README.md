@@ -1,7 +1,8 @@
 ## 8501 - Game Programming 2 - 2020/2021
 <br />
 This repo shows an ASCII maze generator and solver with player progression for the 8501 coursework 2 at Newcastle University. <br />
-The maze generator and solver **_without player progression_** can be found here: ![Link](https://github.com/Akeilee/Game-Programming-1)
+The maze generator and solver **_without player progression_** can be found here: 
+![Link](https://github.com/Akeilee/Game-Programming-1)
 <br /><br />
 
 It uses a depth-first search algorithm with recursion to create the maze.<br />
