@@ -1,6 +1,6 @@
 ## 8501 - Game Programming 2 - 2020/2021
 <br />
-This repo shows an ASCII maze generator and solver with player progression for the 8501 coursework 2 at Newcastle University. 
+This repo shows an ASCII maze generator and solver with player progression for the 8501 coursework 2 at Newcastle University. <br />
 The maze generator and solver **_without player progression_** can be found here: ![Link](https://github.com/Akeilee/Game-Programming-1)
 <br /><br />
 
@@ -32,4 +32,17 @@ The maze then uses a breath-first search algorithm to find the optimal path for 
 
 ### Screenshots
 
+**Maze generation:**<br /><br />
+<a name = "mazeGenerate"><img src="https://github.com/Akeilee/Game-Programming-2/blob/main/Screenshots/createMaze.PNG" width = "250"></a> <br /><br />
 
+**Shortest path for all players:**<br /><br />
+<a name = "shortPath"><img src="https://github.com/Akeilee/Game-Programming-2/blob/main/Screenshots/shortestPath.PNG" width = "275"></a> <br /><br />
+
+**Printing player progression:**<br /><br />
+<a name = "playerProgress"><img src="https://github.com/Akeilee/Game-Programming-2/blob/main/Screenshots/playerProgress.PNG" width = "250"></a> <br /><br />
+
+**Overall shortest path**<br /><br />
+<a name = "overallShort"><img src="https://github.com/Akeilee/Game-Programming-2/blob/main/Screenshots/overallShort.PNG" width = "375"></a> <br /><br />
+
+**Creation of 100 random mazes**<br /><br />
+<a name = "mazeAnalysis"><img src="https://github.com/Akeilee/Game-Programming-2/blob/main/Screenshots/mazeAnalysis2.PNG" width = "500"></a> <br /><br />
