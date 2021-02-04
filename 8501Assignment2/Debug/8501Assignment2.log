@@ -1,0 +1,28 @@
+﻿  Maze.cpp
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(240,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(241,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(278,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(279,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(380,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(381,22): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(450,20): warning C4018: '<=': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(458,23): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(459,24): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(476,26): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(477,27): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(545,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(546,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(587,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(588,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(603,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(604,22): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(615,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(616,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(624,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(625,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(655,20): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(656,21): warning C4018: '<': signed/unsigned mismatch
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(699,55): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.cpp(699,57): warning C5043: 'Maze::readFile': exception specification does not match previous declaration
+D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\8501Assignment2\Maze.h(58): message : see declaration of 'Maze::readFile'
+  8501Assignment2.vcxproj -> D:\Akeina\Documents\NEWCASTLE\Uni\MSc\8501 Programming\CW2\JLee 8501 CW2\8501Assignment2\Debug\8501Assignment2.exe

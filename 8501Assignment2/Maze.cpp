@@ -9,8 +9,8 @@
 
 using namespace std;
 
-int rowArr[] = { -1, 0, 0, 1 };
-int colArr[] = { 0, -1, 1, 0 };
+int rowArr[] = { -1, 0, 0, 1 }; //north east 
+int colArr[] = { 0, -1, 1, 0 }; //south west
 int lowest = INT_MAX;
 int exitX;
 int exitY;
@@ -236,7 +236,7 @@ bool Maze::inBounds(int r, int c, int rSize, int cSize) {
 }
 
 
-void Maze::pPos() {
+void Maze::pPos() { //player position
 	for (int i = 0; i < mazeVect.size(); i++) {
 		for (int j = 0; j < mazeVect[i].size(); j++) {
 			if (mazeVect[i][j] == 'P') {
@@ -247,7 +247,7 @@ void Maze::pPos() {
 	}
 }
 
-void Maze::getpPos() {
+void Maze::getpPos() { //get player position
 
 	while (!pPosList.empty()) {
 		tempi = pPosList.front();
@@ -268,7 +268,7 @@ bool Maze::tileIsValid(vector<vector<char>>& maze, vector<vector<char>>& visited
 		return false;
 }
 
-void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int player) {
+void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int player) {  //x, y is middle of maze   //i, j is player pos
 
 	visitedMaze.resize(rowMain, std::vector<char>(colMain, ' '));
 	tempMaze.resize(rowMain, std::vector<char>(colMain, ' '));
@@ -277,10 +277,10 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 
 	for (int i = 0; i < mazeVect.size(); i++) {
 		for (int j = 0; j < mazeVect[i].size(); j++) {
-			if (mazeVect[i][j] == 'P') {
+			if (mazeVect[i][j] == 'P') {  //P is player
 				visitedMaze[i][j] = ' ';
 			}
-			if (mazeVect[i][j] == 'E') {
+			if (mazeVect[i][j] == 'E') { //E is exit
 				visitedMaze[i][j] = 'X';
 			}
 		}
@@ -307,7 +307,7 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 		int j = node->y;
 		int dist = node->distance;
 
-		if (i == x && j == y) {
+		if (i == x && j == y) { //if found middle of maze then solved
 			tempX = i;
 			tempY = j;
 			min_dist = dist;
@@ -319,7 +319,7 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 			if (i == x && j == y) {
 				break;
 			}
-			if (tileIsValid(maze, visitedMaze, i + rowArr[k], j + colArr[k])) {
+			if (tileIsValid(maze, visitedMaze, i + rowArr[k], j + colArr[k])) { //checking all directions N,E,S,W
 				visitedMaze[i + rowArr[k]][j + colArr[k]] = 'o';
 
 				int currX = node->x;
@@ -327,6 +327,13 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 				visitedList->push_back({ i + rowArr[k], j + colArr[k], dist + 1,currX ,currY, node, v++ });
 				allVisitedNodes->push_back(visitedList->back());
 
+				//for (int i = 0; i < visitedMaze.size(); i++) {
+				//	for (int j = 0; j < visitedMaze[i].size(); j++) {
+				//		cout << visitedMaze[i][j] << ' ';
+				//	}
+				//	cout << '\n';
+				//}
+				//cout << '\n';
 			}
 		}
 	}
@@ -334,7 +341,7 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 	if (min_dist != INT_MAX) {
 		list<Node>* traverseNode = new list<Node>;
 
-		for (int i = 0; i < min_dist; i++) {
+		for (int i = 0; i < min_dist; i++) { //finding path
 
 			vector<Node>::iterator findxy = find_if(allVisitedNodes->begin(), allVisitedNodes->end(), [tempX, tempY, traverseNode](Node& item) {
 				if (item.x == tempX && item.y == tempY)
@@ -356,8 +363,8 @@ void Maze::findPath(vector<vector<char>>& maze, int i, int j, int x, int y, int 
 			tempMaze[rit->prevx][rit->prevy] = 'o';
 		}
 
-		(*allPlayers)[player]->push_back({ rowMain / 2, colMain / 2,0,rowMain / 2, colMain / 2 });
-		(*allPlayers)[player]->push_back({ rowMain / 2, colMain / 2,0,rowMain / 2, colMain / 2 });
+		(*allPlayers)[player]->push_back({ rowMain / 2, colMain / 2,0,rowMain / 2, colMain / 2 }); //i
+		(*allPlayers)[player]->push_back({ rowMain / 2, colMain / 2,0,rowMain / 2, colMain / 2 }); //j
 
 		tempMaze[rowMain / 2][colMain / 2] = 'F';
 

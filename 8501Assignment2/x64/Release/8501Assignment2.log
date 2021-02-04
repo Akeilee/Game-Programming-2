@@ -1,0 +1,11 @@
+﻿  MainProgram.cpp
+  Maze.cpp
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(506,45): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(692,55): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(692,57): warning C5043: 'Maze::readFile': exception specification does not match previous declaration
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.h(58): message : see declaration of 'Maze::readFile'
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 708 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  8501Assignment2.vcxproj -> C:\Users\Akeina\Desktop\8501Assignment2\x64\Release\8501Assignment2.exe

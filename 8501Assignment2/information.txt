@@ -1,0 +1,10 @@
+Information on the properties of different maze and player combinations:
+
+- Larger mazes have a more detailed maze structure compared to small mazes thus players will take longer to get to the finish line on a larger maze.
+- Players are less likely to collide with each other on a larger maze, especially when there are less players.
+- Players spawned near to each other are more likely to use the same path for the shortest route.
+- When the maze is small, players also tend to use the same path even though there are less walls and more empty space to walk on. 
+- The more players there are, the more likely they will spawn near/next to each other on small to medium mazes. 
+- All players are travelling towards the same direction (towards the middle) so there are no deadlock situations for the mazes that have been created.
+- Deadlock situations could be made if players do not use the shortest route/use a different route to the finish line or if players could backtrack instead of missing a turn.
+- Currently have not found any mazes to be unsolvable within this program.  

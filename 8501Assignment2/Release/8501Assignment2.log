@@ -1,0 +1,33 @@
+﻿  MainProgram.cpp
+  Maze.cpp
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(240,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(241,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(278,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(279,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(373,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(374,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(443,20): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(451,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(452,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(469,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(470,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(538,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(539,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(580,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(581,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(596,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(597,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(608,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(609,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(617,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(618,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(648,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(649,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(692,55): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.cpp(692,57): warning C5043: 'Maze::readFile': exception specification does not match previous declaration
+C:\Users\Akeina\Desktop\8501Assignment2\8501Assignment2\Maze.h(58): message : see declaration of 'Maze::readFile'
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 707 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  8501Assignment2.vcxproj -> C:\Users\Akeina\Desktop\8501Assignment2\Release\8501Assignment2.exe
