@@ -1,4 +1,4 @@
-## 8501 - Game Programming - 2020/2021
+## 8501 - Game Programming 2 - 2020/2021
 <br />
 This repo shows an ASCII maze generator and solver for the 8501 coursework at Newcastle University. 
 <br /><br />
