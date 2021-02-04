@@ -1,6 +1,6 @@
 ## 8501 - Game Programming - 2020/2021
 <br />
-This repo shows a ASCII maze generator and solver for the 8501 coursework at Newcastle University. 
+This repo shows an ASCII maze generator and solver for the 8501 coursework at Newcastle University. 
 <br /><br />
 
 It uses a depth-first search algorithm with recursion to create the maze.<br />
